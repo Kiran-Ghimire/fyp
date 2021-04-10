@@ -12,6 +12,7 @@ import {
   DEMOTE_ADMIN,
   FETCH_APPOINTMENT,
   FETCH_USER_APPOINTMENTS,
+  TOTAL_PRICE,
 } from "../actions/booking-types";
 
 const INITIAL_STATE = {
@@ -22,6 +23,7 @@ const INITIAL_STATE = {
   admins: [],
   appointments: [],
   bookingCart: [],
+  totalPrice: null,
 };
 
 const bookingReducer = (state = INITIAL_STATE, action) => {
@@ -146,6 +148,11 @@ const bookingReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         bookingCart: action.payload,
+      };
+    case TOTAL_PRICE:
+      return {
+        ...state,
+        totalPrice: action.payload,
       };
     default:
       return state;

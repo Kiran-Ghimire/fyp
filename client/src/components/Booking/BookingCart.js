@@ -13,10 +13,11 @@ import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import { totalPrice as bill } from "../../actions/booking-actions";
 
 export default function BookingCart() {
   const [bookingCart, setBookingCart] = useState([]);
-
+  const dispatch = useDispatch();
   const userData = useSelector((state) => state.login.userData);
   const [userId] = userData.map((item) => item.User_ID);
 
@@ -144,9 +145,12 @@ export default function BookingCart() {
                 >
                   <Link
                     // className={classes.link}
-                    to="/payment"
+                    to="/hamro/payment"
                   >
-                    <Button style={{ backgroundColor: "teal" }}>
+                    <Button
+                      style={{ backgroundColor: "teal" }}
+                      onClick={() => dispatch(bill(withVAT))}
+                    >
                       Checkout
                     </Button>
                   </Link>

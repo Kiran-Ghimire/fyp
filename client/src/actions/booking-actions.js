@@ -12,6 +12,7 @@ import {
   DEMOTE_ADMIN,
   FETCH_APPOINTMENT,
   FETCH_USER_APPOINTMENTS,
+  TOTAL_PRICE,
 } from "./booking-types";
 import axios from "axios";
 
@@ -176,4 +177,11 @@ export const updateService = () => async (dispatch) => {
   //   type: UPDATE_SERVICE,
   //   payload: res.data.result,
   // });
+};
+
+export const totalPrice = (value) => {
+  return {
+    type: TOTAL_PRICE,
+    payload: value,
+  };
 };

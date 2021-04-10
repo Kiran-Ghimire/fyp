@@ -4,3 +4,4 @@ export const LOGOUT = "LOGOUT";
 
 export const DELETE_ACCOUNT = "DELETE_ACCOUNT";
 export const UPDATE_PROFILE = "UPDATE_PROFILE";
+export const TOTAL_PRICE = "TOTAL_PRICE";

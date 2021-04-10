@@ -28,7 +28,7 @@ export default function Payment() {
           <Link to="/">
             <Paper className="paper">
               <img
-                src={require("../../images/other/cash-in-hand.png").default}
+                src={require("../images/other/cash-in-hand.jpeg").default}
                 alt="cash in hand"
                 className="image-payment"
               />
@@ -41,7 +41,7 @@ export default function Payment() {
         <Grid item xs={6}>
           <Paper className="paper" onClick={() => checkout()}>
             <img
-              src={require("../../images/other/online-payment.png").default}
+              src={require("../images/other/online-payment.jpeg").default}
               alt="online payment"
               className="image-payment"
             />

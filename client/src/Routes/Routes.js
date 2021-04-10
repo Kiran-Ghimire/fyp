@@ -6,6 +6,7 @@ import Login from "../components/Login/Login";
 
 import SignUp from "../components/Login/SignUp";
 import ProtectedRoute from "./ProtectedRoute";
+import Payment from "../Payment/Payment";
 
 import { useSelector } from "react-redux";
 
@@ -24,9 +25,21 @@ export default function Routes() {
     <Switch>
       <Route exact path="/hamro/login" component={Login} />
       <Route exact path="/hamro/signup" component={SignUp} />
-      <ProtectedRoute path="/admin/service" isAuth={token} component={ServicesTable} />
-      <ProtectedRoute path="/admin/userRole" isAuth={token} component={UserRoles} />
-      
+      <ProtectedRoute
+        path="/admin/service"
+        isAuth={token}
+        component={ServicesTable}
+      />
+      <ProtectedRoute
+        path="/admin/userRole"
+        isAuth={token}
+        component={UserRoles}
+      />
+      <ProtectedRoute
+        path="/hamro/payment"
+        isAuth={token}
+        component={Payment}
+      />
       <ProtectedRoute path="/admin" isAuth={token} component={Admin} />
 
       <RoutesNavbar />
