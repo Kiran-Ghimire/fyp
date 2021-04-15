@@ -22,6 +22,8 @@ import {
 
 function BookService() {
   const dispatch = useDispatch();
+  const vehicle = useSelector((state) => state.booking.vehicle);
+  console.log(vehicle);
   const userData = useSelector((state) => state.login.userData);
   useEffect(() => {
     let id;
@@ -32,6 +34,7 @@ function BookService() {
 
     dispatch(fetchAppointment());
   }, []);
+  debugger;
 
   const services = useSelector((state) => state.booking.services);
 
@@ -63,7 +66,7 @@ function BookService() {
                     </Typography>
 
                     <Link
-                      to={`/hamro/booking/${item.services_id}`}
+                      to={`/hamro/${vehicle}/booking/${item.services_id}`}
                       style={{ textDecoration: "none", color: "inherit" }}
                       onClick={() => dispatch(loadCurrentService(item))}
                     >

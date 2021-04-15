@@ -63,7 +63,7 @@ export default function Admin() {
             number={appointments.length}
             title="Appointment Count"
           />
-          <GridContainer number={staffs.length} title="Staff Count" />
+
           <GridContainer
             number={appointments.length}
             title="Total Appointment"

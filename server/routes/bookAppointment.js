@@ -6,10 +6,10 @@ const moment = require("moment");
 // const checkStaff = "SELECT * FROM staff WHERE user_id=?";
 
 const appointmentQuery =
-  "INSERT INTO appointments (User_ID,services_id, date, time) VALUES (?,?,?,?)";
+  "INSERT INTO appointments (User_ID,services_id, date, time, vehicle, vehicle_name) VALUES (?,?,?,?,?,?)";
 
 module.exports = router.post("/bookAppointment", (req, res) => {
-  const { serviceId, userId, time, date } = req.body;
+  const { serviceId, userId, time, date, vehicle, vehicleName } = req.body;
   console.log(time);
   let booked;
   if (time.length > 0) {
@@ -18,8 +18,8 @@ module.exports = router.post("/bookAppointment", (req, res) => {
       (err, result) => {
         result.map((item) => {
           if (
-            // moment(item.date).format("YYYY-MM-DD") ===
-            //   moment(date).format("YYYY-MM-DD") &&
+            moment(item.date).format("YYYY-MM-DD") ===
+              moment(date).format("YYYY-MM-DD") &&
             item.time === time
           ) {
             booked = true;
@@ -31,7 +31,7 @@ module.exports = router.post("/bookAppointment", (req, res) => {
         if (!booked === true) {
           db.query(
             appointmentQuery,
-            [userId, serviceId, date, time],
+            [userId, serviceId, date, time, vehicle, vehicleName],
             (err, result) => {
               console.log(err);
               if (!err) {

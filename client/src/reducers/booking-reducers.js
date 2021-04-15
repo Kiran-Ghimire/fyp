@@ -13,6 +13,7 @@ import {
   FETCH_APPOINTMENT,
   FETCH_USER_APPOINTMENTS,
   TOTAL_PRICE,
+  VEHICLE_TYPE,
 } from "../actions/booking-types";
 
 const INITIAL_STATE = {
@@ -24,6 +25,7 @@ const INITIAL_STATE = {
   appointments: [],
   bookingCart: [],
   totalPrice: null,
+  vehicle: null,
 };
 
 const bookingReducer = (state = INITIAL_STATE, action) => {
@@ -153,6 +155,11 @@ const bookingReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         totalPrice: action.payload,
+      };
+    case VEHICLE_TYPE:
+      return {
+        ...state,
+        vehicle: action.payload,
       };
     default:
       return state;

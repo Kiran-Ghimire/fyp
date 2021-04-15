@@ -23,6 +23,7 @@ import useSettings from "./useSettings";
 import { withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import CustomSnackbar from "../common/CustomSnackbar";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   profileName: {
@@ -40,12 +41,13 @@ function UserProfile() {
   const [deletePopUp, setDeletePopUp] = useState(false);
 
   const userData = useSelector((state) => state.login.userData);
+  const appointments = useSelector((state) => state.booking.appointments);
+  const [userId] = userData.map((item) => item.User_ID);
 
   const [response, setResponse] = useState();
   const [snackbar, setSnackbar] = useState(false);
   const [snackType, setSnackType] = useState();
 
-  
   const GridContent = ({ children, xs }) => {
     return (
       <Grid item xs={xs}>
@@ -77,7 +79,7 @@ function UserProfile() {
   };
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" style={{ marginTop: "10rem" }}>
       {response && response.length > 0 && (
         <CustomSnackbar
           snackbarOpen={snackbar}
@@ -89,7 +91,6 @@ function UserProfile() {
       {userData &&
         userData.map((item) => (
           <div key={item.User_ID}>
-            
             <Typography
               variant="h6"
               className={classes.profileName}
@@ -97,7 +98,7 @@ function UserProfile() {
             >
               {item.User_Name}
             </Typography>
-    
+
             <Grid
               container
               component="div"
@@ -120,7 +121,7 @@ function UserProfile() {
                     setSnackType={setSnackType}
                     setSnackbar={setSnackbar}
                   />
-    
+
                   <Box
                     style={{
                       padding: "0.5rem 1.5rem 1rem 1.5rem",
@@ -129,15 +130,16 @@ function UserProfile() {
                   >
                     <Grid container component="div">
                       <GridContent xs={4}>Name</GridContent>
-                      <GridContent xs={6}>
-                        {item.User_Name}
-                      </GridContent>
+                      <GridContent xs={6}>{item.User_Name}</GridContent>
                     </Grid>
                     <Grid container component="div">
                       <GridContent xs={4}>Email</GridContent>
                       <GridContent xs={6}>{item.Email}</GridContent>
                     </Grid>
-                    
+                    <Grid container component="div">
+                      <GridContent xs={4}>Phone</GridContent>
+                      <GridContent xs={6}>{item.phone}</GridContent>
+                    </Grid>
                   </Box>
                 </Paper>
               </Grid>
@@ -167,23 +169,21 @@ function UserProfile() {
               setDeletePopUp={setDeletePopUp}
               userId={item.User_ID}
             />
-    
-            {/* <PopUp
-        openPopUp={deletePopUp}
-        setOpenPopUp={setDeletePopUp}
-        title="Alert"
-      >
-        <Box width="12rem">
-          <Typography>
-            Deleting your account will remove all the records from our database.
-          </Typography>
-          <Button>Proceed</Button>
-          <Button>Abort</Button>
-        </Box>
-      </PopUp> */}
-    
-            {/* recent activities */}
-            
+            <Paper style={{ marginTop: "2rem" }}>
+              {item.role === "C" && <CustomToolbar title="Recent Activities" />}
+              {item.role === "C" &&
+                appointments
+                  .filter((item) => item.User_ID === userId)
+                  .map((item) => (
+                    <Toolbar>
+                      Booked {item.servicesName} on{" "}
+                      {moment(item.date).format("YYYY/MM/DD")} {item.time}.{" "}
+                      {item.payment == "offline" || item.payment === " "
+                        ? "Payment not done."
+                        : `Chosen Payment method is ${item.payment}`}
+                    </Toolbar>
+                  ))}
+            </Paper>
           </div>
         ))}
     </Container>

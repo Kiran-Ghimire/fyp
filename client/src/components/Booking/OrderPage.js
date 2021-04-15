@@ -16,11 +16,14 @@ import moment from "moment";
 function OrderPage() {
   const { DropdownSelect, CustomDatePicker } = useCustomForm();
 
+  const vehicle = useSelector((state) => state.booking.vehicle);
   const item = useSelector((state) => state.booking.currentItem);
   const userData = useSelector((state) => state.login.userData);
 
   const [choosenTime, setChoosenTime] = useState(null);
   const [choosenSpecialist, setChoosenSpecialist] = useState(null);
+
+  const [choosenVehicle, setChoosenVehicle] = useState(null);
 
   const appointments = useSelector((state) => state.booking.appointments);
 
@@ -32,7 +35,7 @@ function OrderPage() {
 
   const staffs = useSelector((state) => state.booking.staffs);
   const specialist = staffs.map((item) => ({
-    value: item.fname,
+    value: item.User_Name,
     id: item.user_id,
   }));
 
@@ -43,16 +46,26 @@ function OrderPage() {
 
   const [appointmentDate, setappointmentDate] = useState(tommorowDate);
 
-  // const SpecialistsAvailable = [
-  //   { id: 1, name: "Luffy" },
-  //   { id: 2, name: "Chopper" },
-  //   { id: 3, name: "Nami" },
-  //   { id: 4, name: "Zoro" },
-  //   { id: 5, name: "Sanji" },
-  // ];
-
   const TimeAvailable = [
     { value: "9:00-10:00", id: "9-10" },
+    { value: "10:00-11:00", id: "10-11" },
+    { value: "11:00-12:00", id: "11-12" },
+    { value: "2:00-3:00", id: "2-3" },
+    { value: "3:00-4:00", id: "3-4" },
+    { value: "4:00-5:00", id: "4-5" },
+  ];
+
+  const Bike = [
+    { value: "bike", id: "9-10" },
+    { value: "10:00-11:00", id: "10-11" },
+    { value: "11:00-12:00", id: "11-12" },
+    { value: "2:00-3:00", id: "2-3" },
+    { value: "3:00-4:00", id: "3-4" },
+    { value: "4:00-5:00", id: "4-5" },
+  ];
+
+  const Car = [
+    { value: "car", id: "9-10" },
     { value: "10:00-11:00", id: "10-11" },
     { value: "11:00-12:00", id: "11-12" },
     { value: "2:00-3:00", id: "2-3" },
@@ -78,6 +91,8 @@ function OrderPage() {
             userId: userId,
             time: choosenTime,
             date: appointmentDate,
+            vehicle: vehicle,
+            vehicleName: choosenVehicle,
           })
           .then((res) => {
             setSnackbar(true);
@@ -160,12 +175,46 @@ function OrderPage() {
               <Box className="description">
                 <Typography>{item.services_description}</Typography>
               </Box>
-              <Box marginBottom="1rem" marginTop="1rem">
+              {vehicle === "bike" ? (
+                <DropdownSelect
+                  title="Choose Vehicle"
+                  name="bike"
+                  id="bike"
+                  value={choosenVehicle}
+                  array={Bike}
+                  onChange={(e) => {
+                    setChoosenVehicle(e.target.value);
+                    console.log(e.target.value);
+                  }}
+                />
+              ) : (
+                <DropdownSelect
+                  title="Choose Vehicle"
+                  name="car"
+                  id="car"
+                  value={choosenVehicle}
+                  array={Car}
+                  onChange={(e) => {
+                    setChoosenVehicle(e.target.value);
+                    console.log(e.target.value);
+                  }}
+                />
+              )}
+
+              <Box marginBottom="1rem">
                 <Typography htmlFor="date-picker" variant="caption">
                   Choose Date
                 </Typography>
-                k
+
                 <br />
+                <CustomDatePicker
+                  name="date"
+                  id="date-picker"
+                  disablePast
+                  style={{ width: "18rem" }}
+                  value={appointmentDate}
+                  onChange={(value) => setappointmentDate(value)}
+                />
               </Box>
               {TimeAvailable && (
                 <DropdownSelect

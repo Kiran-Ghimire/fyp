@@ -13,6 +13,7 @@ import {
   FETCH_APPOINTMENT,
   FETCH_USER_APPOINTMENTS,
   TOTAL_PRICE,
+  VEHICLE_TYPE,
 } from "./booking-types";
 import axios from "axios";
 
@@ -182,6 +183,13 @@ export const updateService = () => async (dispatch) => {
 export const totalPrice = (value) => {
   return {
     type: TOTAL_PRICE,
+    payload: value,
+  };
+};
+
+export const vehicleType = (value) => {
+  return {
+    type: VEHICLE_TYPE,
     payload: value,
   };
 };

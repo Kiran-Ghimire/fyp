@@ -43,8 +43,12 @@ export default function RoutesNavbar() {
         <Route path="/hamro/login" exact component={Login} />
         <Route path="/hamro/signup" exact component={SignUp} />
         <Route exact path="/hamro/bookingCart" component={BookingCart} />
-        <Route exact path="/hamro/booking/:id" component={OrderPage} />
-        <Route exact path="/hamro/booking" component={BookService} />
+        <Route exact path="/hamro/:vehicle/booking/:id" component={OrderPage} />
+        <Route exact path="/hamro/:vehicle/booking/:id" component={OrderPage} />
+
+        <Route exact path="/hamro/car/booking" component={BookService} />
+        <Route exact path="/hamro/bike/booking" component={BookService} />
+
         <ProtectedRoute
           path="/hamro/user"
           isAuth={token}

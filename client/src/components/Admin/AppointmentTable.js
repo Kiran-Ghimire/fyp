@@ -22,8 +22,8 @@ import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import AdminDashboard from "./AdminDashboard";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../redux/Ecommerce/eStore-actions";
-import { fetchAppointment } from "../../redux/Booking/booking-actions";
+
+import { fetchAppointment } from "../../actions/booking-actions";
 import { moment } from "moment";
 
 const tableIcons = {
@@ -55,7 +55,7 @@ const tableIcons = {
 export default function AppointmentTable() {
   const [isLoading, setIsLoading] = useState(false);
 
-  const services = useSelector((state) => state.booking.services);
+  const services = useSelector((state) => state.booking.appointments);
   //store array from database
   const [records, setRecords] = useState(services);
   const dispatch = useDispatch();
@@ -65,10 +65,10 @@ export default function AppointmentTable() {
     setIsLoading(true);
     dispatch(fetchAppointment());
     setTimeout(() => {
-      dispatch(fetchProducts());
       setIsLoading(false);
     }, 1500);
   }, [records]);
+  console.log(records);
 
   return (
     <AdminDashboard>
@@ -84,9 +84,9 @@ export default function AppointmentTable() {
               return <p>{rowData.tableData.id + 1}</p>;
             },
           },
-          { field: "serviceName", title: "Service Name" },
-          { field: "servicePrice", title: "Price" },
-          { field: "staff_name", title: "Staff" },
+          { field: "servicesName", title: "Service Name" },
+          { field: "servicesPrice", title: "Price" },
+
           { field: "date", title: "Date" },
           { field: "time", title: "Time" },
           { field: "client", title: "Client" },

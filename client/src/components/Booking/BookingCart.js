@@ -100,9 +100,9 @@ export default function BookingCart() {
                   No items in the cart.{" "}
                   <Link
                     // lassName={classes.link}
-                    to="/store"
+                    to="/"
                   >
-                    VISIT STORE
+                    VISIT HOME
                   </Link>
                 </Typography>
               </Box>

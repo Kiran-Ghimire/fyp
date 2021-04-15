@@ -17,6 +17,7 @@ import Admin from "../components/Admin/Admin";
 import UserRoles from "../components/Admin/UserRoles";
 import ProductsTable from "../components/Admin/ProductsTable";
 import ServicesTable from "../components/Admin/ServicesTable";
+import AppointmentTable from "../components/Admin/AppointmentTable";
 
 export default function Routes() {
   const token = useSelector((state) => state.login.authToken);
@@ -29,6 +30,11 @@ export default function Routes() {
         path="/admin/service"
         isAuth={token}
         component={ServicesTable}
+      />
+      <ProtectedRoute
+        path="/admin/booking"
+        isAuth={token}
+        component={AppointmentTable}
       />
       <ProtectedRoute
         path="/admin/userRole"

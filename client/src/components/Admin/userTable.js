@@ -22,8 +22,9 @@ import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import AdminDashboard from "./AdminDashboard";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../redux/Ecommerce/eStore-actions";
-import { fetchAppointment } from "../../redux/Booking/booking-actions";
+
+import { fetchAppointment } from "../../actions/booking-actions";
+import { moment } from "moment";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -51,28 +52,28 @@ const tableIcons = {
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };
 
-export default function EcommerceTable() {
+export default function userTable() {
   const [isLoading, setIsLoading] = useState(false);
 
-  const appointments = useSelector((state) => state.booking.appointments);
+  const services = useSelector((state) => state.booking.appointments);
   //store array from database
-  const [records, setRecords] = useState(appointments);
+  const [records, setRecords] = useState(services);
   const dispatch = useDispatch();
 
-  console.log(appointments);
+  console.log(services);
   useEffect(() => {
     setIsLoading(true);
     dispatch(fetchAppointment());
     setTimeout(() => {
-      dispatch(fetchProducts());
       setIsLoading(false);
     }, 1500);
   }, [records]);
+  console.log(records);
 
   return (
     <AdminDashboard>
       <MaterialTable
-        title="Ecommerce Table"
+        title="Appointment Table"
         icons={tableIcons}
         isLoading={isLoading}
         columns={[
@@ -83,8 +84,11 @@ export default function EcommerceTable() {
               return <p>{rowData.tableData.id + 1}</p>;
             },
           },
-          { field: "serviceName", title: "Product Name" },
-          { field: "servicePrice", title: "Price" },
+          { field: "servicesName", title: "Service Name" },
+          { field: "servicesPrice", title: "Price" },
+
+          { field: "date", title: "Date" },
+          { field: "time", title: "Time" },
           { field: "client", title: "Client" },
         ]}
         data={records}
