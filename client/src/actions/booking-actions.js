@@ -14,6 +14,8 @@ import {
   FETCH_USER_APPOINTMENTS,
   TOTAL_PRICE,
   VEHICLE_TYPE,
+  HANDLE_PAYMENT,
+  CART,
 } from "./booking-types";
 import axios from "axios";
 
@@ -190,6 +192,22 @@ export const totalPrice = (value) => {
 export const vehicleType = (value) => {
   return {
     type: VEHICLE_TYPE,
+    payload: value,
+  };
+};
+
+export const handlePayment = (id, option) => async (dispatch) => {
+  axios.post("/payment", { id: id, option: option });
+  // const res = axios.get("/getAppointment");
+  dispatch({
+    type: HANDLE_PAYMENT,
+    // payload: res.data.result,
+  });
+};
+
+export const cart = (value) => {
+  return {
+    type: CART,
     payload: value,
   };
 };

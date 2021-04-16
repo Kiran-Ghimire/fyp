@@ -14,6 +14,8 @@ import {
   FETCH_USER_APPOINTMENTS,
   TOTAL_PRICE,
   VEHICLE_TYPE,
+  HANDLE_PAYMENT,
+  CART,
 } from "../actions/booking-types";
 
 const INITIAL_STATE = {
@@ -26,6 +28,7 @@ const INITIAL_STATE = {
   bookingCart: [],
   totalPrice: null,
   vehicle: null,
+  cart: [],
 };
 
 const bookingReducer = (state = INITIAL_STATE, action) => {
@@ -160,6 +163,19 @@ const bookingReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         vehicle: action.payload,
+      };
+    case HANDLE_PAYMENT:
+      // let appointment = state.appointments.find((item) =>
+      //   item.user_id === action.payload.id ? true : false
+      // );
+      return {
+        ...state,
+        appointments: action.payload,
+      };
+    case CART:
+      return {
+        ...state,
+        cart: action.payload,
       };
     default:
       return state;

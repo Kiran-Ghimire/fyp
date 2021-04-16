@@ -34,7 +34,6 @@ function BookService() {
 
     dispatch(fetchAppointment());
   }, []);
-  debugger;
 
   const services = useSelector((state) => state.booking.services);
 

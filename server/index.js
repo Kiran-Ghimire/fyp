@@ -78,6 +78,15 @@ app.use(appointmentDetailsRouter);
 const deleteCartRouter = require("./routes/deleteCart");
 app.use(deleteCartRouter);
 
+const paymentRouter = require("./routes/payment");
+app.use(paymentRouter);
+
+const confirmationRouter = require("./routes/emailUser");
+app.use(confirmationRouter);
+
+const userDetailRouter = require("./routes/userDetail");
+app.use(userDetailRouter);
+
 const verifyJWT = (req, res, next) => {
   const token = req.headers["authorization"];
 

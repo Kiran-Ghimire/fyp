@@ -22,6 +22,7 @@ import CustomToolbar from "../common/CustomToolbar";
 import { useDispatch, useSelector } from "react-redux";
 import { AiFillDelete } from "react-icons/ai";
 import { ListItem } from "@material-ui/core";
+import UserTable from "./UserTable";
 import {
   fetchStaffs,
   demoteStaff,
@@ -47,7 +48,7 @@ export default function UserRoles() {
   //for search box value
   const [value, setValue] = useState("");
 
-  const [admin, setAdmin]= useState([])
+  const [admin, setAdmin] = useState([]);
 
   //data from backend
   const [userData, setUserData] = useState(null);
@@ -57,8 +58,8 @@ export default function UserRoles() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios.get("/getAdmin").then(res => setAdmin(res.data.result))
-    dispatch(fetchStaffs());
+    axios.get("/getAdmin").then((res) => setAdmin(res.data.result));
+    // dispatch(fetchStaffs());
     dispatch(fetchAdmin());
   }, []);
 
@@ -73,7 +74,7 @@ export default function UserRoles() {
       setSnackType(res.data.type);
     });
     setTimeout(() => {
-      dispatch(fetchStaffs());
+      // dispatch(fetchStaffs());
       dispatch(fetchAdmin());
     }, 1000);
   };
@@ -87,10 +88,10 @@ export default function UserRoles() {
         .post("/admin/userRole", { email: value })
         .then((res) => setUserData(res.data.result));
     });
-    axios.get("/getAdmin").then(res => setAdmin(res.data.result))
+    axios.get("/getAdmin").then((res) => setAdmin(res.data.result));
     setOpenPopUp(false);
     setTimeout(() => {
-      dispatch(fetchStaffs());
+      // dispatch(fetchStaffs());
       dispatch(fetchAdmin());
     }, 1000);
   };
@@ -99,11 +100,10 @@ export default function UserRoles() {
     console.log(userId);
     dispatch(demoteAdmin(userId));
     setTimeout(() => {
-      axios.get("/getAdmin").then(res => setAdmin(res.data.result))
+      axios.get("/getAdmin").then((res) => setAdmin(res.data.result));
       dispatch(fetchAdmin());
     }, 1000);
   };
-
 
   return (
     <AdminDashboard>
@@ -175,9 +175,7 @@ export default function UserRoles() {
                   <Typography variant="body1">Username</Typography>
                 </Grid>
                 <Grid item xs={7}>
-                  <Typography variant="body1">
-                    {item.User_Name} 
-                  </Typography>
+                  <Typography variant="body1">{item.User_Name}</Typography>
                 </Grid>
                 <Grid item xs={5}>
                   <Typography variant="body1">Email id</Typography>
@@ -192,7 +190,7 @@ export default function UserRoles() {
                   <Typography variant="body1">
                     {item.role === "A" ? (
                       <span>Admin</span>
-                    )  : (
+                    ) : (
                       <span>Client</span>
                     )}
                   </Typography>
@@ -228,7 +226,6 @@ export default function UserRoles() {
                     control={<Radio />}
                     label="Admin"
                   />
-                  
                 </RadioGroup>
 
                 <Box style={{ marginTop: "1rem" }}>
@@ -244,8 +241,6 @@ export default function UserRoles() {
           </Box>
         ))}
       <Grid container spacing={3} style={{ marginTop: "4rem" }}>
-       
-
         <Grid item xs={12} md={6}>
           <Paper>
             {!admin > 0 && (
@@ -260,9 +255,7 @@ export default function UserRoles() {
               <ListItem
                 style={{ display: "flex", justifyContent: "space-between" }}
               >
-                <Typography variant="body2">
-                  {admin.User_Name} 
-                </Typography>
+                <Typography variant="body2">{admin.User_Name}</Typography>
                 <Typography
                   type="button"
                   variant="body2"
@@ -293,6 +286,7 @@ export default function UserRoles() {
           </Paper>
         </Grid>
       </Grid>
+      <UserTable />
     </AdminDashboard>
   );
 }

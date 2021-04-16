@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Container, Grid, Box, Typography, Button } from "@material-ui/core";
+import {
+  Container,
+  Grid,
+  Box,
+  Typography,
+  Button,
+  TextField,
+} from "@material-ui/core";
 import { FaCheckCircle } from "react-icons/fa";
 import { SiCashapp } from "react-icons/si";
 
@@ -14,13 +21,14 @@ import axios from "axios";
 import moment from "moment";
 
 function OrderPage() {
-  const { DropdownSelect, CustomDatePicker } = useCustomForm();
+  const { DropdownSelect, CustomDatePicker, CustomTextField } = useCustomForm();
 
   const vehicle = useSelector((state) => state.booking.vehicle);
   const item = useSelector((state) => state.booking.currentItem);
   const userData = useSelector((state) => state.login.userData);
 
   const [choosenTime, setChoosenTime] = useState(null);
+  const [vehicleNumber, setVehicleNumber] = useState("");
   const [choosenSpecialist, setChoosenSpecialist] = useState(null);
 
   const [choosenVehicle, setChoosenVehicle] = useState(null);
@@ -78,11 +86,11 @@ function OrderPage() {
     e.preventDefault();
     let userId;
     let timeId;
-
+    console.log(vehicleNumber);
     // TimeAvailable.map((item) => (timeId = item.id));
 
     if (userData.length > 0) {
-      if (choosenTime !== null) {
+      if (vehicleNumber !== null && choosenTime !== null) {
         userData.map((user) => (userId = user.User_ID));
         console.log(userId);
         axios
@@ -93,6 +101,7 @@ function OrderPage() {
             date: appointmentDate,
             vehicle: vehicle,
             vehicleName: choosenVehicle,
+            vehicleNumber: vehicleNumber,
           })
           .then((res) => {
             setSnackbar(true);
@@ -175,6 +184,7 @@ function OrderPage() {
               <Box className="description">
                 <Typography>{item.services_description}</Typography>
               </Box>
+
               {vehicle === "bike" ? (
                 <DropdownSelect
                   title="Choose Vehicle"
@@ -228,7 +238,18 @@ function OrderPage() {
                   }}
                 />
               )}
-
+              <TextField
+                label="Vehicle Number"
+                variant="standard"
+                type="text"
+                value={vehicleNumber}
+                style={{ width: "18rem" }}
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setVehicleNumber(e.target.value);
+                }}
+                placeholder="Ba 96 Pa 71"
+              />
               <Button
                 onClick={onSubmit}
                 style={{

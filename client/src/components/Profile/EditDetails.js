@@ -52,7 +52,7 @@ export default function EditDetails({
               <Formik
                 initialValues={{
                   Username: item.User_Name,
-                  
+                  phone: item.phone,
                 }}
                 validationSchema={validationSchema}
                 onSubmit={submitHandler}
@@ -79,7 +79,7 @@ export default function EditDetails({
                           errortext={errors.User_Name}
                         />
                       </Grid>
-                      
+
                       <Grid item xs={3}>
                         <Typography
                           style={{ marginTop: "0.5rem" }}
@@ -96,8 +96,25 @@ export default function EditDetails({
                           {item.Email}
                         </Typography>
                       </Grid>
-                      
-                     
+                      <Grid item xs={3}>
+                        <Typography
+                          style={{ marginTop: "0.5rem" }}
+                          variant="standard"
+                        >
+                          Phone
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={8}>
+                        <CustomTextField
+                          variant="standard"
+                          value={values.phone}
+                          name="phone"
+                          type="text"
+                          error={errors.phone && touched.phone}
+                          onChange={handleChange}
+                          errortext={errors.phone}
+                        />
+                      </Grid>
                     </Grid>
                     <Box style={{ marginTop: "1.2rem" }}>
                       <Button

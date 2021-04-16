@@ -52,23 +52,19 @@ const tableIcons = {
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };
 
-export default function userTable() {
+export default function UserTable() {
   const [isLoading, setIsLoading] = useState(false);
 
-  const services = useSelector((state) => state.booking.appointments);
   //store array from database
-  const [records, setRecords] = useState(services);
+  const [records, setRecords] = useState([]);
   const dispatch = useDispatch();
 
-  console.log(services);
   useEffect(() => {
-    setIsLoading(true);
-    dispatch(fetchAppointment());
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
+    axios.get("/admin/userDetail").then((res) => {
+      setRecords(res.data.result);
+      console.log(res.data.result);
+    });
   }, [records]);
-  console.log(records);
 
   return (
     <AdminDashboard>
@@ -84,12 +80,11 @@ export default function userTable() {
               return <p>{rowData.tableData.id + 1}</p>;
             },
           },
-          { field: "servicesName", title: "Service Name" },
-          { field: "servicesPrice", title: "Price" },
 
-          { field: "date", title: "Date" },
-          { field: "time", title: "Time" },
-          { field: "client", title: "Client" },
+          { field: "User_Name", title: "Name" },
+          { field: "Email", title: "Email" },
+          { field: "role", title: "Role" },
+          { field: "phone", title: "phone" },
         ]}
         data={records}
       />

@@ -13,7 +13,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import { totalPrice as bill } from "../../actions/booking-actions";
+import { totalPrice as bill, cart } from "../../actions/booking-actions";
 
 export default function BookingCart() {
   const [bookingCart, setBookingCart] = useState([]);
@@ -66,6 +66,10 @@ export default function BookingCart() {
                     <Typography variant="body2">
                       Rs. {item.servicesPrice}
                     </Typography>
+                    <Typography variant="body2">
+                      Vehicle Name: {item.vehicle_name}
+                    </Typography>
+                    <Typography variant="body2"> Time: {item.time}</Typography>
                   </Grid>
                   <Grid item xs={3}>
                     <Typography variant="body2">
@@ -149,7 +153,11 @@ export default function BookingCart() {
                   >
                     <Button
                       style={{ backgroundColor: "teal" }}
-                      onClick={() => dispatch(bill(withVAT))}
+                      onClick={() => {
+                        dispatch(bill(withVAT));
+                        console.log(bookingCart);
+                        dispatch(cart(bookingCart));
+                      }}
                     >
                       Checkout
                     </Button>

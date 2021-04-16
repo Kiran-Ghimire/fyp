@@ -25,6 +25,7 @@ import BookService from "../components/Booking/BookService";
 import BookingCart from "../components/Booking/BookingCart";
 import OrderPage from "../components/Booking/OrderPage";
 import HoverCart from "../components/common/HoverCart";
+import Chat from "../components/Chat";
 
 export default function RoutesNavbar() {
   const token = useSelector((state) => state.login.authToken);
@@ -48,7 +49,7 @@ export default function RoutesNavbar() {
 
         <Route exact path="/hamro/car/booking" component={BookService} />
         <Route exact path="/hamro/bike/booking" component={BookService} />
-
+        <Route exact path="/hamro/chat" component={Chat} />
         <ProtectedRoute
           path="/hamro/user"
           isAuth={token}

@@ -1,22 +1,18 @@
 const router = require("express").Router();
 const db = require("../database");
 
-const updateData =
-  "UPDATE users SET fname=?, lname=?, dob=?, phone=? WHERE user_id=?";
+const updateData = "UPDATE user SET User_Name=?, phone=? WHERE User_ID=?";
 
 module.exports = router.post("/updateUser", (req, res) => {
   const id = req.body.id;
-  const { firstname, lastname, dob, contact } = req.body.values;
+  const { Username, phone } = req.body.values;
 
-  db.query(
-    updateData,
-    [firstname, lastname, dob, contact, id],
-    (err, result) => {
-      if (err) {
-        res.json({ message: "Error Occurred", type: "error" });
-      } else {
-        res.json({ message: "Successfully Updated", type: "success" });
-      }
+  db.query(updateData, [Username, phone, id], (err, result) => {
+    if (err) {
+      console.log(err);
+      res.json({ message: "Error Occurred", type: "error" });
+    } else {
+      res.json({ message: "Successfully Updated", type: "success" });
     }
-  );
+  });
 });
