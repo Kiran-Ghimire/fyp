@@ -87,6 +87,9 @@ app.use(confirmationRouter);
 const userDetailRouter = require("./routes/userDetail");
 app.use(userDetailRouter);
 
+const contactFormEmailRouter = require("./routes/contactFormEmail");
+app.use(contactFormEmailRouter);
+
 const verifyJWT = (req, res, next) => {
   const token = req.headers["authorization"];
 

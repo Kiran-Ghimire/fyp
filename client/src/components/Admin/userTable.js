@@ -69,7 +69,7 @@ export default function UserTable() {
   return (
     <AdminDashboard>
       <MaterialTable
-        title="Appointment Table"
+        title="Users Table"
         icons={tableIcons}
         isLoading={isLoading}
         columns={[
