@@ -6,16 +6,18 @@ import {
   Grid,
   Button,
 } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import ContactForm from "./common/ContactForm";
 import CustomSnackbar from "./common/CustomSnackbar";
+import About from "./About";
+import UserReview from "./UserReview";
 
 const useStyles = makeStyles({
   paper: {
     width: "40rem",
     padding: "2.5rem",
-    height: "24rem",
+    height: "30rem",
   },
   box: {
     display: "flex",
@@ -35,9 +37,32 @@ function Contact() {
   const [snackbar, setSnackbar] = useState(false);
   const [snackType, setSnackType] = useState();
 
+  useEffect(() => {
+    var options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0,
+    };
+
+    function success(pos) {
+      var crd = pos.coords;
+
+      console.log("Your current position is:");
+      console.log(`Latitude : ${crd.latitude}`);
+      console.log(`Longitude: ${crd.longitude}`);
+      console.log(`More or less ${crd.accuracy} meters.`);
+    }
+
+    function error(err) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+  }, []);
+
   return (
     <>
-      <div id="contact" style={{ marginBottom: "5rem" }}></div>
+      <div id="contact" style={{ marginBottom: "10rem" }}></div>
       {response && response.length > 0 && (
         <CustomSnackbar
           snackbarOpen={snackbar}
@@ -49,9 +74,9 @@ function Contact() {
       {/* for smooth scrolling */}
       <div style={{ marginBottom: "5rem" }}></div>
       <Box>
-        <Container className={classes.contactContainer}>
+        <Container>
           <Typography variant="h4" align="center">
-            GET IN TOUCH WITH US
+            CONTACT US
           </Typography>
           <Box className={classes.box}>
             <Paper className={classes.paper}>
@@ -79,6 +104,8 @@ function Contact() {
           </Box>
         </Container>
       </Box>
+      <About />
+      <UserReview />
     </>
   );
 }

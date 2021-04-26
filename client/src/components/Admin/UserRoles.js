@@ -146,7 +146,7 @@ export default function UserRoles() {
             style={{
               marginLeft: "2rem",
               width: "8rem",
-              backgroundColor: "teal",
+              backgroundColor: "#757ce8",
             }}
           >
             Search
@@ -198,7 +198,7 @@ export default function UserRoles() {
               </Grid>
               <Box display="flex" justifyContent="center" marginTop="1.2rem">
                 <Button
-                  style={{ backgroundColor: "teal", width: "12rem" }}
+                  style={{ backgroundColor: "#757ce8", width: "12rem" }}
                   onClick={() => setOpenPopUp(true)}
                 >
                   <Typography>Change Role</Typography>

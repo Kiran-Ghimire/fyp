@@ -73,7 +73,7 @@ export default function AppointmentTable() {
   return (
     <AdminDashboard>
       <MaterialTable
-        title="Appointment Table"
+        title="Bookings Table"
         icons={tableIcons}
         isLoading={isLoading}
         columns={[

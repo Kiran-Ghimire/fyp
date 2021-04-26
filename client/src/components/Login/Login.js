@@ -1,157 +1,148 @@
 import {
-    Typography,
-    Box,
-    Paper,
-    TextField,
-    makeStyles,
-    Grid,
-    Button,
-    Checkbox,
-    Container
-  } from "@material-ui/core";
-  
-  import React, { useEffect, useState } from "react";
-  import { useDispatch, useSelector} from 'react-redux';
-  import { userData, authToken} from '../../actions/index';
+  Typography,
+  Box,
+  Paper,
+  TextField,
+  makeStyles,
+  Grid,
+  Button,
+  Checkbox,
+  Container,
+} from "@material-ui/core";
 
-  
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { userData, authToken } from "../../actions/index";
+import CustomSnackbar from "../common/CustomSnackbar";
 
-  
-  import { Formik, Form } from "formik";
-  import * as Yup from "yup";
-  import axios from "axios";
-  
-//   import GLogin from "./GLogin";
-//   import FLogin from "./FLogin";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
+
 import { useHistory, Link } from "react-router-dom";
-  
-  import {FcHome} from 'react-icons/fc';
 
-  import GoogleLog from './GoogleLog';
-  
-  
-  
-  
-  const useStyles = makeStyles({
-    contactContainer: { marginTop: "10%", marginBottom: "10%" },
-    paper: {
-      width: "33rem",
-      padding: "2.5rem", 
-    },
-    box: {
-      display: "flex",
-      justifyContent: "center",
-      marginTop: "2rem",
-    },
-    submitBtn: {
-      textAlign: "center",
-      marginTop: "1.4rem",
-    },
-    signIn: {
-      marginTop: "-1rem",
-      paddingBottom: "1rem",
-      marginLeft: "18rem",
-    },
-    link: {
+import { FcHome } from "react-icons/fc";
+
+import GoogleLog from "./GoogleLog";
+
+const useStyles = makeStyles({
+  contactContainer: { marginTop: "10%", marginBottom: "10%" },
+  paper: {
+    width: "33rem",
+    padding: "2.5rem",
+  },
+  box: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "2rem",
+  },
+  submitBtn: {
+    textAlign: "center",
+    marginTop: "1.4rem",
+  },
+  signIn: {
+    marginTop: "-1rem",
+    paddingBottom: "1rem",
+    marginLeft: "18rem",
+  },
+  link: {
+    color: "inherit",
+    textDecoration: "none",
+    "&:hover": {
       color: "inherit",
       textDecoration: "none",
-      "&:hover": {
-        color: "inherit",
-        textDecoration: "none",
-      },
     },
-  });
-  
-  axios.defaults.withCredentials = true;
-  
-  const LoginSchema = Yup.object().shape({
-    email: Yup.string().email().required("Invalid Email!!"),
-    password: Yup.string().required("Password is required"),
-    
-  });
-  
-  const initialValues = {
-    email: "",
-    password: "",
-    loggedIn: false,
+  },
+});
+
+axios.defaults.withCredentials = true;
+
+const LoginSchema = Yup.object().shape({
+  email: Yup.string().email().required("Invalid Email!!"),
+  password: Yup.string().required("Password is required"),
+});
+
+const initialValues = {
+  email: "",
+  password: "",
+  loggedIn: false,
+};
+
+const Login = () => {
+  let history = useHistory();
+  const classes = useStyles();
+
+  const [response, setResponse] = useState();
+  const [snackbar, setSnackbar] = useState(false);
+  const [snackType, setSnackType] = useState();
+
+  const dispatch = useDispatch();
+  const Token = useSelector((state) => state.login.authToken);
+
+  const onSubmit = (values) => {
+    axios
+      .post("/hamro/login", {
+        values,
+      })
+      .then((response) => {
+        setResponse(response.data.message);
+        setSnackType(response.data.type);
+        if (response.data.auth === true) {
+          dispatch(userData(response.data.result));
+          dispatch(authToken(response.data.token));
+        }
+      });
   };
-  
-  const Login=() => {
-    let history = useHistory();
-    const classes = useStyles();
 
-    const [response, setResponse] = useState();
-    const [snackbar, setSnackbar] = useState(false);
-    const [snackType, setSnackType] = useState();
+  useEffect(async () => {
+    await axios.get("/hamro/login").then((response) => {
+      if (response.data.loggedIn === true && Token != null) {
+        setSnackbar(true);
+        setResponse(response.data.message);
+        setSnackType(response.data.type);
+        setTimeout(() => {
+          history.push("/");
+        }, 1500);
+      }
+    });
+  }, []);
 
-    const  dispatch = useDispatch();
-    const Token = useSelector((state) => state.login.authToken);
-  
-    const onSubmit = (values) => {
-      axios
-        .post("/hamro/login", {
-          values,
-        })
-        .then((response) => {
-          setResponse(response.data.message);
-          setSnackType(response.data.type);
-          if (response.data.auth === true) {
-            dispatch(userData(response.data.result));
-            dispatch(authToken(response.data.token));
-          }
-        });
-    };
-
-    useEffect(async () => {
-       await axios.get("/hamro/login").then((response) => {
-        if (response.data.loggedIn === true && Token != null) {
-          setSnackbar(true);
-          setResponse(response.data.message);
-          setSnackType(response.data.type);
+  const userAuthenticated = async () => {
+    await axios
+      .post("/isUserAuth")
+      .then((response) => {
+        response.data.auth === true &&
           setTimeout(() => {
             history.push("/");
           }, 1500);
-        }
-      });
-    }, []);
+      })
+      .catch((err) => console.log(err));
 
-    const userAuthenticated = async () => {
-      await axios
-        .post("/isUserAuth")
-        .then((response) => {
-          response.data.auth === true &&
-            setTimeout(() => {
-              history.push("/");
-            }, 1500);
-        })
-        .catch((err) => console.log(err));
-  
-      axios.defaults.headers.common["authorization"] = Token;
-    };
-  
-    
+    axios.defaults.headers.common["authorization"] = Token;
+  };
 
-    
-  
-    return (
-        <div className={classes.background}>
-        <Container className={classes.contactContainer}>
-        <Typography variant="h4" style={{ textAlign: "center", color: "#c28285" }}>
-        <FcHome  style={{margin:'0 0.5rem -0.2rem 0' }} />Hamro Workshop
+  return (
+    <div className={classes.background}>
+      <Container className={classes.contactContainer}>
+        <Typography
+          variant="h4"
+          style={{ textAlign: "center", color: "#c28285" }}
+        >
+          <FcHome style={{ margin: "0 0.5rem -0.2rem 0" }} />
+          Hamro Workshop
         </Typography>
         <Box className={classes.box}>
           <Paper className={classes.paper}>
-          <Link  to="/hamro/signup" className={classes.link}>
-          <Typography
-            align="right"
-            type="button"
-            variant="body2"
-            className={classes.signIn}
-          >
-            Create an account
-          </Typography>
-        </Link>
-        
+            <Link to="/hamro/signup" className={classes.link}>
+              <Typography
+                align="right"
+                type="button"
+                variant="body2"
+                className={classes.signIn}
+              >
+                Create an account
+              </Typography>
+            </Link>
 
             <Formik
               initialValues={initialValues}
@@ -170,7 +161,6 @@ import { useHistory, Link } from "react-router-dom";
                         name="email"
                         type="email"
                         id="email"
-                        
                         error={errors.email && touched.email}
                         onChange={handleChange}
                         helperText={
@@ -203,7 +193,6 @@ import { useHistory, Link } from "react-router-dom";
                         }
                       />
                     </Grid>
-                    
                   </Grid>
                   <Box textAlign="center">
                     <Button
@@ -217,23 +206,28 @@ import { useHistory, Link } from "react-router-dom";
                     >
                       Login
                     </Button>
-                    
                   </Box>
                 </Form>
               )}
             </Formik>
-  
+
             <hr style={{ backgroundColor: "white" }} />
-            <Box textAlign= 'center'><GoogleLog  /></Box>
+            <Box textAlign="center">
+              <GoogleLog />
+            </Box>
           </Paper>
-          
-          
         </Box>
       </Container>
-        </div>
-      
-    );
-  }
-  
-  export default Login;
-  
+      {response && response.length > 0 && (
+        <CustomSnackbar
+          snackbarOpen={snackbar}
+          setSnackbar={setSnackbar}
+          snackType={snackType}
+          snackContent={response}
+        />
+      )}
+    </div>
+  );
+};
+
+export default Login;

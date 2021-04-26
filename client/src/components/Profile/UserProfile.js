@@ -24,6 +24,7 @@ import { withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import CustomSnackbar from "../common/CustomSnackbar";
 import moment from "moment";
+import Appointment from "../Appointment";
 
 const useStyles = makeStyles((theme) => ({
   profileName: {
@@ -77,9 +78,12 @@ function UserProfile() {
       </Box>
     );
   };
-
+  console.log(appointments);
   return (
-    <Container maxWidth="md" style={{ marginTop: "10rem" }}>
+    <Container
+      maxWidth="md"
+      style={{ marginTop: "10rem", marginBottom: "15rem" }}
+    >
       {response && response.length > 0 && (
         <CustomSnackbar
           snackbarOpen={snackbar}
@@ -91,6 +95,7 @@ function UserProfile() {
       {userData &&
         userData.map((item) => (
           <div key={item.User_ID}>
+            <ProfilePic />
             <Typography
               variant="h6"
               className={classes.profileName}

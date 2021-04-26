@@ -15,7 +15,7 @@ import RoutesNavbar from "./RoutesNavbar";
 import Admin from "../components/Admin/Admin";
 //import Admin from "../components/Admin/Admin";
 import UserRoles from "../components/Admin/UserRoles";
-import ProductsTable from "../components/Admin/ProductsTable";
+
 import ServicesTable from "../components/Admin/ServicesTable";
 import AppointmentTable from "../components/Admin/AppointmentTable";
 

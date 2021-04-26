@@ -51,7 +51,7 @@ const tableIcons = {
   ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };
-export default function ProductsTable() {
+export default function ServicesTable() {
   //state for delete and edit popup for selected row
   const [DeletePopUp, setDeletePopUp] = useState(false);
   const [editPopUp, setEditPopUp] = useState(false);
@@ -110,7 +110,11 @@ export default function ProductsTable() {
               />
             ),
           },
-          { field: "services_description", title: "Description", sorting: false },
+          {
+            field: "services_description",
+            title: "Description",
+            sorting: false,
+          },
         ]}
         data={records}
         actions={[

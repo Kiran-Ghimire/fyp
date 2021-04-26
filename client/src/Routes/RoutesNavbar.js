@@ -6,6 +6,7 @@ import Appointment from "../components/Appointment";
 import Contact from "../components/Contact";
 import Services from "../components/Services";
 import Offers from "../components/Offers";
+import Footer from "../components/Footer";
 
 import Login from "../components/Login/Login";
 import SignUp from "../components/Login/SignUp";
@@ -25,7 +26,8 @@ import BookService from "../components/Booking/BookService";
 import BookingCart from "../components/Booking/BookingCart";
 import OrderPage from "../components/Booking/OrderPage";
 import HoverCart from "../components/common/HoverCart";
-import Chat from "../components/Chat";
+import Chat from "../components/Chatt/Chat/Chat";
+import Join from "../components/Chatt/Join/Join";
 
 export default function RoutesNavbar() {
   const token = useSelector((state) => state.login.authToken);
@@ -49,6 +51,7 @@ export default function RoutesNavbar() {
 
         <Route exact path="/hamro/car/booking" component={BookService} />
         <Route exact path="/hamro/bike/booking" component={BookService} />
+        <Route exact path="/hamro/join" component={Join} />
         <Route exact path="/hamro/chat" component={Chat} />
         <ProtectedRoute
           path="/hamro/user"
@@ -62,6 +65,7 @@ export default function RoutesNavbar() {
         {/* <ProtectedRoute path="/profile" component={UserProfile} isAuth={} /> */}
         {/* <Footer /> */}
       </Switch>
+      <Footer />
     </div>
   );
 }

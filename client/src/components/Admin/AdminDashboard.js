@@ -19,7 +19,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { AiFillShop, AiOutlineHome } from "react-icons/ai";
 import { SiProducthunt, SiGooglecalendar } from "react-icons/si";
 import { BsBag } from "react-icons/bs";
-import { AiFillQuestionCircle } from 'react-icons/ai';
+import { AiFillQuestionCircle } from "react-icons/ai";
 import {
   RiScissors2Fill,
   RiMapPinUserLine,
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    backgroundColor: "teal",
+    backgroundColor: "#757ce8",
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -181,7 +181,6 @@ export default function AdminDashboard({ children }) {
 
         <Divider />
         <List style={{ display: "flex", flexDirection: "column" }}>
-          
           <ListItemWithLink path="/admin/service" title="Services">
             <BsBag size={20} />
           </ListItemWithLink>
@@ -190,9 +189,6 @@ export default function AdminDashboard({ children }) {
         <List style={{ display: "flex", flexDirection: "column" }}>
           <ListItemWithLink path="/admin/booking" title="Booking">
             <RiCalendarCheckLine size={20} />
-          </ListItemWithLink>
-          <ListItemWithLink path="/admin/review" title="Review">
-            <AiFillQuestionCircle size={20} />
           </ListItemWithLink>
         </List>
       </Drawer>

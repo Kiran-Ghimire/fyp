@@ -1,17 +1,12 @@
 const router = require("express").Router();
 const multer = require("multer");
 const path = require("path");
-//const updateServiceAPI = require("../services/updateServiceAPI");
+
 const db = require("../database");
 const fs = require("fs");
 
 const withoutImageQuery =
   "UPDATE services SET services_name=?,services_price=?,services_description=? WHERE services_id =?";
-
-// const withImageQuery =
-//   "UPDATE services SET services_name=?,services_price=?,services_description=?,image=? WHERE services_id =?";
-
-// const getPrevImageQuery = "SELECT image FROM services WHERE services_id = ?";
 
 const DIR = "../client/src/images/services";
 
@@ -30,7 +25,13 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single("image");
 
 module.exports = router.post("/updateService", upload, (req, res) => {
-  const { services_name, services_price, services_description, services_id, image } = req.body;
+  const {
+    services_name,
+    services_price,
+    services_description,
+    services_id,
+    image,
+  } = req.body;
   console.log(req.body);
   try {
     // if (image !== "old") {
@@ -63,21 +64,21 @@ module.exports = router.post("/updateService", upload, (req, res) => {
     //     }
     //   });
     // } else {
-      db.query(
-        withoutImageQuery,
-        [services_name, services_price, services_description, services_id],
-        (err, result) => {
-          if (err) {
-            res.json({ message: "Error Occurred", type: "error" });
-          } else {
-            res.json({
-              message: "Successfully Updated",
-              type: "success",
-              result: result
-            });
-          }
+    db.query(
+      withoutImageQuery,
+      [services_name, services_price, services_description, services_id],
+      (err, result) => {
+        if (err) {
+          res.json({ message: "Error Occurred", type: "error" });
+        } else {
+          res.json({
+            message: "Successfully Updated",
+            type: "success",
+            result: result,
+          });
         }
-      );
+      }
+    );
     // }
   } catch (err) {
     console.log(err);

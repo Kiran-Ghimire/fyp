@@ -18,7 +18,7 @@ export default function useTableActions() {
   const { CustomTextField } = useCustomForm();
   const dispatch = useDispatch();
   const updatedService = useSelector((state) => state.booking.services);
-//   const updatedProduct = useSelector((state) => state.store.products);
+  //   const updatedProduct = useSelector((state) => state.store.products);
 
   const EditItem = (props) => {
     const {
@@ -57,7 +57,7 @@ export default function useTableActions() {
           setIsLoading(false);
           //  setRecords(updatedService);
         }, 1500);
-      } 
+      }
     };
     return (
       <PopUp
@@ -157,7 +157,7 @@ export default function useTableActions() {
           //  setRecords(updatedService);
         }, 1500);
         // dispatch(fetchServices());
-      } 
+      }
     };
 
     return (
@@ -168,7 +168,7 @@ export default function useTableActions() {
       >
         <Box width="20rem">
           <Typography>
-            Deleting an item will remove all the records from our database.
+            Deleting this item will remove its all records from our database.
           </Typography>
 
           <Box style={{ marginTop: "1rem" }}>

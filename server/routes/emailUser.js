@@ -4,7 +4,7 @@ const moment = require("moment");
 
 module.exports = router.post("/confirmation", (req, res) => {
   const { email, bookingCart } = req.body;
-  console.log(bookingCart);
+  console.log(email);
   let bookingDetails =
     bookingCart?.length > 0
       ? bookingCart.map(
@@ -24,8 +24,8 @@ module.exports = router.post("/confirmation", (req, res) => {
   `;
 
   let mail = {
-    from: `Hamro Workshop ${email}`,
-    to: `karkinishant14@gmail.com`,
+    from: `Hamro Workshop `,
+    to: "kiran.ghimiray098@gmail.com",
     subject: `Thankyou for connecting with us.`,
     text: reply,
   };

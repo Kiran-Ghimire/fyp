@@ -11,7 +11,6 @@ import useCustomForm from "./useCustomForm";
 import { addService, fetchServices } from "../../actions/booking-actions";
 import { useDispatch, useSelector } from "react-redux";
 
-
 export default function AddItem(props) {
   const { postRoute, title, setRecords, setIsLoading } = props;
   const { CustomTextField } = useCustomForm();
@@ -19,7 +18,6 @@ export default function AddItem(props) {
   const [openPopup, setOpenPopup] = useState(false);
 
   const services = useSelector((state) => state.booking.services);
-
 
   const Schema = Yup.object().shape({
     name: Yup.string().required("Name is required!"),
@@ -67,7 +65,7 @@ export default function AddItem(props) {
       <Button
         onClick={() => setOpenPopup(true)}
         style={{
-          backgroundColor: "teal",
+          backgroundColor: "#757ce8",
           marginBottom: "1rem",
           width: "13rem",
         }}

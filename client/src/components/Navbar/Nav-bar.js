@@ -26,7 +26,7 @@ import { connect, useDispatch } from "react-redux";
 
 import useWindowScrollPosition from "@rehooks/window-scroll-position";
 
-import './Navbar.scss';
+import "./Navbar.scss";
 //import MenuDropdown from "../common/MenuDropdown";
 import { logout, userData } from "../../actions/index";
 
@@ -96,15 +96,15 @@ function Navbar({ cart, userData }) {
             <Grid item xs={3} sm={2}>
               <Link to="/">
                 <Box
-                  height="3rem"
+                  height="5rem"
                   display="flex"
                   justifyContent="center"
                   marginTop="-0.8rem"
                   marginLeft="1.5rem"
                 >
                   <img
-                    //src={require("../../images/other/logo-white.png").default}
-                    //alt="logo"
+                    src={require("../../images/other/logowhite.png").default}
+                    alt="logo"
                   />
                 </Box>
               </Link>
@@ -134,16 +134,16 @@ function Navbar({ cart, userData }) {
                           component="span"
                           className="icon-styless"
                         >
-                          {userData?.length > 0 ? ( 
+                          {userData?.length > 0 ? (
                             userData.map((item) => (
                               <Avatar
                                 style={{ width: "1.7rem", height: "1.7rem" }}
                                 //src={
-                                  //item.image != null
-                                    //? require(`../../images/profile/${item.image}`)
-                                        //.default
-                                    //: null
-                               // }
+                                //item.image != null
+                                //? require(`../../images/profile/${item.image}`)
+                                //.default
+                                //: null
+                                // }
                               />
                             ))
                           ) : (
@@ -171,14 +171,14 @@ function Navbar({ cart, userData }) {
                         </Box>
                       </Link>
                       <Divider />
-                      
-                        <Box
-                          component="div"
-                          padding="0.5rem"
-                          display="flex"
-                          className="icon-styless"
-                          onClick={() => dispatch(logout())}
-                        >
+
+                      <Box
+                        component="div"
+                        padding="0.5rem"
+                        display="flex"
+                        className="icon-styless"
+                        onClick={() => dispatch(logout())}
+                      >
                         {userData.length > 0 ? (
                           userData.map((item) => (
                             <Link to="" key={item.user_id} className="link">
@@ -208,14 +208,21 @@ function Navbar({ cart, userData }) {
                             </Typography>
                           </Link>
                         )}
-                          
-                        </Box>
-                      
+                      </Box>
                     </Paper>
                   </Box>
                 </li>
-
-                
+                <li
+                  style={{
+                    fontWeight: "bold",
+                    letterSpacing: "3px",
+                    marginLeft: "2rem",
+                  }}
+                >
+                  <Link to="/hamro/join" className="link">
+                    Chat
+                  </Link>
+                </li>
               </ul>
             </Grid>
           </Grid>
@@ -271,7 +278,6 @@ function Navbar({ cart, userData }) {
 
 const mapStateToProps = (state) => {
   return {
-    
     userData: state.login?.userData,
   };
 };

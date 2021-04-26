@@ -20,7 +20,7 @@ import {
   loadCurrentService,
 } from "../../actions/booking-actions";
 
-function BookService() {
+const BookService = () => {
   const dispatch = useDispatch();
   const vehicle = useSelector((state) => state.booking.vehicle);
   console.log(vehicle);
@@ -39,12 +39,15 @@ function BookService() {
 
   return (
     <>
-      <Container maxWidth="lg" style={{ marginTop: "10rem" }}>
+      <Container
+        maxWidth="md"
+        style={{ marginTop: "15rem", minHeight: "40vh", marginBottom: "15rem" }}
+      >
         <Box>
-          <Grid container spacing={2}>
+          <Grid container spacing={8}>
             {services.map((item) => (
-              <Grid key={item.services_id} item xs={12} sm={6} md={3}>
-                <Paper className="product-container">
+              <Grid key={item.services_id} item xs={12} sm={4}>
+                <Paper>
                   <Box className="image-container">
                     <img
                       src={
@@ -61,7 +64,7 @@ function BookService() {
                       {item.services_name}
                     </Typography>
                     <Typography align="center" variant="body1">
-                      Rs. {item.services_price}
+                      Starts From Rs. {item.services_price}
                     </Typography>
 
                     <Link
@@ -72,7 +75,7 @@ function BookService() {
                       <Button
                         style={{
                           marginBottom: "0.6rem",
-                          backgroundColor: "teal",
+                          backgroundColor: "#757ce8",
                           marginTop: "0.3rem",
                           width: "9rem",
                         }}
@@ -89,6 +92,6 @@ function BookService() {
       </Container>
     </>
   );
-}
+};
 
 export default BookService;

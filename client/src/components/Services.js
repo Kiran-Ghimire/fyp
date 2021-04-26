@@ -3,6 +3,7 @@ import Hero from "./Hero";
 import Banner from "./Banner";
 import { Link } from "react-router-dom";
 import BookService from "./Booking/BookService";
+import "../Payment/payment.scss";
 import {
   Grid,
   Container,
@@ -21,55 +22,70 @@ const Services = () => {
   return (
     <div>
       <Hero hero="servicesHero"></Hero>
-      <Banner title="Our Services" subtitle="Best in Town">
-        <Link to="/" className="btn btn-warning">
-          RETURN HOME
+      <Banner
+        title="Our Services"
+        subtitle="Get quality vehicle service a cheap price."
+      >
+        <Link to="/hamro/offers" className="btn btn-warning">
+          SEE OFFERS
         </Link>
       </Banner>
-      <Typography align="center" variant="h5">
+      <Typography align="center" variant="h5" style={{ marginTop: "5rem" }}>
         Choose Vehicle Type
       </Typography>
-      <Grid
-        container
-        spacing={3}
-        alignItems="center"
-        style={{ marginTop: "3rem" }}
-      >
-        <Grid item xs={6}>
-          <Link to="/hamro/bike/booking">
-            <Paper
-              className="paper"
-              onClick={() => dispatch(vehicleType("bike"))}
+      <Container maxWidth="md">
+        <Grid
+          container
+          spacing={3}
+          alignItems="center"
+          style={{ marginTop: "3rem" }}
+        >
+          <Grid item xs={6}>
+            <Link to="/hamro/bike/booking">
+              <Paper
+                className="paper"
+                onClick={() => dispatch(vehicleType("bike"))}
+              >
+                <img
+                  src={require("../images/other/bikee.jpg").default}
+                  alt="bike"
+                  className="image-payment"
+                />
+              </Paper>
+            </Link>
+            <Typography
+              align="center"
+              variant="h6"
+              className="text"
+              style={{ marginBottom: "5rem" }}
             >
-              <img
-                src={require("../images/other/cash-in-hand.jpeg").default}
-                alt="cash in hand"
-                className="image-payment"
-              />
-            </Paper>
-          </Link>
-          <Typography align="center" variant="h6" className="text">
-            Bike
-          </Typography>
+              Bike
+            </Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <Link
+              to="/hamro/car/booking"
+              onClick={() => dispatch(vehicleType("car"))}
+            >
+              <Paper className="paper">
+                <img
+                  src={require("../images/other/Car.jpg").default}
+                  alt="online payment"
+                  className="image-payment"
+                />
+              </Paper>
+            </Link>
+            <Typography
+              align="center"
+              variant="h6"
+              className="text"
+              style={{ marginBottom: "5rem" }}
+            >
+              Car
+            </Typography>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <Link
-            to="/hamro/car/booking"
-            onClick={() => dispatch(vehicleType("car"))}
-          >
-            <Paper className="paper">
-              <img
-                src={require("../images/other/online-payment.jpeg").default}
-                alt="online payment"
-                className="image-payment"
-              />
-            </Paper>
-          </Link>
-          <Typography align="center" variant="h6" className="text">
-            Car
-          </Typography>
-        </Grid>
-      </Grid>
+      </Container>
     </div>
   );
 };

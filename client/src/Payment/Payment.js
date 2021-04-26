@@ -50,7 +50,7 @@ export default function Payment() {
                 dispatch(handlePayment(userId, offline));
                 dispatch(fetchAppointment());
                 axios.post("/confirmation", {
-                  email: userData.map((item) => item.email),
+                  email: userData.map((item) => item.Email),
                   //cart: cart,
                   bookingCart: cart,
                 });
@@ -63,7 +63,7 @@ export default function Payment() {
               }}
             >
               <img
-                src={require("../images/other/cash-in-hand.jpeg").default}
+                src={require("../images/other/cash.jpg").default}
                 alt="cash in hand"
                 className="image-payment"
               />
@@ -84,17 +84,17 @@ export default function Payment() {
               setResponse("Thankyou for choosing us");
               dispatch(fetchAppointment());
               axios.post("/confirmation", {
-                email: userData.map((item) => item.email),
+                email: userData.map((item) => item.Email),
                 //cart: cart,
                 bookingCart: cart,
               });
               setTimeout(() => {
-                history.push("/#services");
+                history.push("/hamro/services");
               }, 9500);
             }}
           >
             <img
-              src={require("../images/other/online-payment.jpeg").default}
+              src={require("../images/other/online-payment.jpg").default}
               alt="online payment"
               className="image-payment"
             />

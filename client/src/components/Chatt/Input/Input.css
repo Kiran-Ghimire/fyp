@@ -1,0 +1,40 @@
+.form {
+  display: flex;
+  border-top: 2px solid #d3d3d3;
+}
+
+.inputt {
+  border: none;
+  border-radius: 0;
+  padding: 4%;
+  width: 100%;
+  background-color: #ffffff;
+  font-size: 14px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  background-color: rgb(255, 255, 255);
+}
+input ::placeholder {
+  opacity: 0.8;
+  color: white;
+}
+
+.sendButtonn {
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #757ce8;
+  font-size: 12px;
+  border: none;
+  width: 25%;
+}
+
+.sendButton:hover {
+  background: #757ce8;
+  font-weight: 600;
+  box-shadow: 0 0 0 3px #ff000042;
+}

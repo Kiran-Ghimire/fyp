@@ -41,12 +41,6 @@ function OrderPage() {
 
   const dispatch = useDispatch();
 
-  const staffs = useSelector((state) => state.booking.staffs);
-  const specialist = staffs.map((item) => ({
-    value: item.User_Name,
-    id: item.user_id,
-  }));
-
   //to get tommorows date
   const todayMoment = moment();
   const tommorowMoment = todayMoment.clone().add(1, "days");
@@ -64,21 +58,21 @@ function OrderPage() {
   ];
 
   const Bike = [
-    { value: "bike", id: "9-10" },
-    { value: "10:00-11:00", id: "10-11" },
-    { value: "11:00-12:00", id: "11-12" },
-    { value: "2:00-3:00", id: "2-3" },
-    { value: "3:00-4:00", id: "3-4" },
-    { value: "4:00-5:00", id: "4-5" },
+    { value: "Honda XR", id: "9-10" },
+    { value: "Hero Xpulse", id: "10-11" },
+    { value: "Pulsar NS 200", id: "11-12" },
+    { value: "Bajaj Dominar", id: "2-3" },
+    { value: "Honda Shine", id: "3-4" },
+    { value: "Honda CRF", id: "4-5" },
   ];
 
   const Car = [
-    { value: "car", id: "9-10" },
-    { value: "10:00-11:00", id: "10-11" },
-    { value: "11:00-12:00", id: "11-12" },
-    { value: "2:00-3:00", id: "2-3" },
-    { value: "3:00-4:00", id: "3-4" },
-    { value: "4:00-5:00", id: "4-5" },
+    { value: "Maruti Suzuki", id: "9-10" },
+    { value: "Ford Escort", id: "10-11" },
+    { value: "Volkswagen Polo", id: "11-12" },
+    { value: "Suzuki Celerio X", id: "2-3" },
+    { value: "Ford Figo", id: "3-4" },
+    { value: "Nissan Magnite XE Base", id: "4-5" },
   ];
   let history = useHistory();
 
@@ -136,7 +130,7 @@ function OrderPage() {
           snackContent={response}
         />
       )}
-      <Container style={{ paddingTop: "8rem" }}>
+      <Container style={{ paddingTop: "8rem", marginBottom: "15rem" }}>
         <Grid container spacing={4}>
           <Grid item sm={12} md={6} style={{ marginTop: "3rem" }}>
             <Box
@@ -154,15 +148,15 @@ function OrderPage() {
             <Box className="image-subText">
               <Typography>
                 <FaCheckCircle className="icons" />
-                100% Customer Satisfaction
+                Customer Satisfaction is our top priority.
               </Typography>
               <Typography>
                 <FaCheckCircle className="icons" />
-                Cancel Appointment Anytime
+                Cancel booking anytime you want.
               </Typography>
               <Typography>
                 <SiCashapp className="icons" />
-                Payment method of your choice
+                Payment method according to your choice
               </Typography>
             </Box>
           </Grid>
@@ -176,9 +170,11 @@ function OrderPage() {
               </Typography>
 
               <Box className="product-info">
-                <Box className="price">Rs. {item.services_price}</Box>
+                <Box className="price">
+                  Starts from Rs. {item.services_price}
+                </Box>
                 <Typography variant="caption" className="price-subText">
-                  Exclusive of taxes
+                  Exclusive of all taxes.
                 </Typography>
               </Box>
               <Box className="description">
@@ -253,7 +249,7 @@ function OrderPage() {
               <Button
                 onClick={onSubmit}
                 style={{
-                  backgroundColor: "teal",
+                  backgroundColor: "#757ce8",
                   color: "white",
                   width: "14rem",
                   padding: "0.6rem",

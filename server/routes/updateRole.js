@@ -6,8 +6,6 @@ const updateQuery = "UPDATE user SET role = ? WHERE User_ID = ?";
 
 const checkQuery = "SELECT * FROM staff WHERE user_id=?";
 
-const insertIntoStaffQuery = "INSERT INTO staff (user_id,name) VALUES (?,?)";
-
 module.exports = router.post("/updateRole", (req, res) => {
   const { id, role } = req.body;
   console.log(req.body);
@@ -27,7 +25,5 @@ module.exports = router.post("/updateRole", (req, res) => {
     //     console.log(err);
     //   }
     // );
-
-   
   });
 });

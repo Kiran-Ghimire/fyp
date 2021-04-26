@@ -8,11 +8,9 @@ import { useDispatch } from "react-redux";
 import { deleteAccount } from "../../actions/index";
 import { useHistory } from "react-router";
 
-
-
 export default function useSettings() {
   const { CustomTextField } = useCustomForm();
-  let history= useHistory();
+  let history = useHistory();
 
   const ChangePassword = () => {
     return (
@@ -82,7 +80,7 @@ export default function useSettings() {
               onClick={() => {
                 setDeletePopUp(false);
                 dispatch(deleteAccount(userId));
-                history.push('/');
+                history.push("/");
               }}
             >
               <Typography color="error">Proceed</Typography>

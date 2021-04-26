@@ -7,7 +7,7 @@ import useCustomForm from "../common/useCustomForm";
 import { Typography } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-//import { updateProfile } from "../../redux/Login/login-actions";
+import { updateProfile } from "../../actions/index";
 
 const useStyles = makeStyles((theme) => ({
   imgSize: {
@@ -62,27 +62,27 @@ export default function ProfilePic({ source, userId }) {
       data.append("id", userId);
 
       // axios.post(`/profileImage`, data).then((res) => console.log(res));
-      //dispatch(updateProfile(data));
+      dispatch(updateProfile(data));
     };
     return (
       <Box
         type="button"
         className={classes.changeImg}
-        onMouseEnter={() => {
-          setIcon(
-            <ImageInput
-              styling={{ marginTop: "0.5rem" }}
-              onChange={(e) => addImage(e)}
-            >
-              <Typography variant="caption" style={{ padding: "1rem" }}>
-                Change
-              </Typography>
-            </ImageInput>
-          );
-        }}
-        onMouseLeave={() => {
-          setIcon(<AiFillCamera size={18} />);
-        }}
+        // onMouseEnter={() => {
+        //   setIcon(
+        //     <ImageInput
+        //       styling={{ marginTop: "0.5rem" }}
+        //       onChange={(e) => addImage(e)}
+        //     >
+        //       <Typography variant="caption" style={{ padding: "1rem" }}>
+        //         Change
+        //       </Typography>
+        //     </ImageInput>
+        //   );
+        // }}
+        // onMouseLeave={() => {
+        //   setIcon(<AiFillCamera size={18} />);
+        // }}
       >
         {icon}
       </Box>
@@ -91,13 +91,13 @@ export default function ProfilePic({ source, userId }) {
   return (
     <div>
       <Box className={classes.box} display="flex" justifyContent="center">
-        <Badge
+        {/* <Badge
           overlap="circle"
           badgeContent={<BadgeComponent />}
           anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-        >
-          <Avatar alt="profile" src={image} className={classes.imgSize} />
-        </Badge>
+        > */}
+        <Avatar alt="profile" src={image} className={classes.imgSize} />
+        {/* </Badge> */}
       </Box>
     </div>
   );

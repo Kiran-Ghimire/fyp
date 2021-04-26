@@ -36,7 +36,7 @@ export default function BookingCart() {
     withVAT = totalPrice + Math.round(totalPrice * (13 / 100));
   }
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" style={{ marginBottom: "12rem" }}>
       <div style={{ marginTop: "10rem" }}>
         {bookingCart !== undefined && bookingCart.length > 0 ? (
           bookingCart.map((item) => (
@@ -152,7 +152,7 @@ export default function BookingCart() {
                     to="/hamro/payment"
                   >
                     <Button
-                      style={{ backgroundColor: "teal" }}
+                      style={{ backgroundColor: "#757ce8" }}
                       onClick={() => {
                         dispatch(bill(withVAT));
                         console.log(bookingCart);
