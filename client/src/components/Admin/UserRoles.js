@@ -36,7 +36,6 @@ export default function UserRoles() {
   const [snackbar, setSnackbar] = useState(false);
   const [snackType, setSnackType] = useState();
 
-  //popup for demoting staff
   const [deletePopUp, setDeletePopUp] = useState(false);
 
   //for popup
